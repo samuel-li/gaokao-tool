@@ -1,0 +1,59 @@
+/* 专业数据 */
+https://api.zjzw.cn/web/api/?keyword=&level1=1&level2=&level3=&page=1&size=30&sort=&uri=apidata/api/gkv3/special/lists
+{
+    "code": "0000",
+    "message": "成功---success",
+    "data": {
+        "item": [
+            {
+                "boy_rate": "40",    // 男生比例
+                "degree": "哲学学士",    // 学位名称
+                "fivesalaryavg": 11000, // 平均薪酬
+                "girl_rate": "60",      // 女生比例
+                "hightitle": "哲学",    // 专业名称
+                "id": "gkspecial1",     // id
+                "level1": "1",
+                "level1_name": "本科",   // 学历
+                "level2": "3",
+                "level2_name": "哲学",   // 大类
+                "level3": "34",
+                "level3_name": "哲学类",  // 二级分类
+                "limit_year": "四年",
+                "name": "哲学",           // 专业名称
+                "rank": "1096",           // 专业排名
+                "salaryavg": "0",
+                "spcode": "010101",
+                "special_id": "1",     // 专业 ID
+                "view_month": "27614",
+                "view_total": "2420530",
+                "view_week": "2116"
+            },
+            {
+                "boy_rate": "81",
+                "degree": "工学学士",
+                "fivesalaryavg": 11200,
+                "girl_rate": "19",
+                "hightitle": "自动化",
+                "id": "gkspecial171",
+                "level1": "1",
+                "level1_name": "本科",
+                "level2": "10",
+                "level2_name": "工学",
+                "level3": "70",
+                "level3_name": "自动化类",
+                "limit_year": "四年",
+                "name": "自动化",
+                "rank": "926",
+                "salaryavg": 13133,
+                "spcode": "080801",
+                "special_id": "171",
+                "view_month": "21234",
+                "view_total": "1807898",
+                "view_week": "13874"
+            }
+        ],
+        "numFound": 792
+    },
+    "location": "",
+    "encrydata": ""
+}

@@ -1,0 +1,110 @@
+{
+    "schema": {
+        "id": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "唯一ID"
+        },
+        "boy_rate": {
+            "type": "smallint",
+            "default": 0,
+            "comment": "男生比例"
+        },
+        "degree": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "学位名称"
+        },
+        "fivesalaryavg": {
+            "type": "int",
+            "default": 0,
+            "comment": "5年平均薪酬"
+        },
+        "girl_rate": {
+            "type": "smallint",
+            "default": 0,
+            "comment": "女生比例"
+        },
+        "hightitle": {
+            "type": "varchar(256)",
+            "default": "",
+            "comment": "专业名称"
+        },
+        "level1": {
+            "type": "smallint",
+            "default": 1,
+            "comment": "一级类别 1-本科"
+        },
+        "level1_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "学历"
+        },
+        "level2": {
+            "type": "smallint",
+            "default": 1,
+            "comment": "专业大类 "
+        },
+        "level2_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "专业大类"
+        },
+        "level3": {
+            "type": "smallint",
+            "default": 0,
+            "comment": "专业二级分类 "
+        },
+        "level3_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "专业二级分类"
+        },
+        "limit_year": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "学制"
+        },
+        "name": {
+            "type": "varchar(256)",
+            "default": "",
+            "comment": "专业名称"
+        },
+        "rank": {
+            "type": "int",
+            "default": 0,
+            "comment": "专业排名"
+        },
+        "salaryavg": {
+            "type": "int",
+            "default": 0,
+            "comment": "平均薪酬"
+        },
+        "spcode": {
+            "type": "varchar(16)",
+            "default": 0,
+            "comment": "专业代码"
+        },
+        "special_id": {
+            "type": "varchar(16)",
+            "default": 0,
+            "comment": "专业ID"
+        },
+        "view_month": {
+            "type": "int",
+            "default": 0,
+            "comment": "月访问量"
+        },
+        "view_total": {
+            "type": "int",
+            "default": 0,
+            "comment": "总访问量"
+        },
+        "view_week": {
+            "type": "int",
+            "default": 0,
+            "comment": "周访问量"
+        }
+    },
+    "pk": "id"
+}

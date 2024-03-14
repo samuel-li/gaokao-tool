@@ -1,0 +1,205 @@
+{
+    "schema": {
+        "school_id": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "学校ID"
+        },
+        "admissions": {
+            "type": "smallint(5)",
+            "default": 2,
+            "comment": "强基计划 1-是， 2-否"
+        },
+        "answerurl": {
+            "type": "varchar(200)",
+            "default": "",
+            "comment": "校方问答链接"
+        },
+        "belong": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "所在省份"
+        },
+        "central": {
+            "type": "smallint(5)",
+            "default": 2,
+            "comment": "中央部委直属 1-是 2不是"
+        },
+        "city_id": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "所在城市ID"
+        },
+        "city_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "所在城市名称"
+        },
+        "code_enroll": {
+            "type": "varchar(8)",
+            "default": "",
+            "comment": "招生ID"
+        },
+        "colleges_level": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "学校级别"
+        },
+        "county_id": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "所在区县ID"
+        },
+        "county_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "所在区县名称"
+        },
+        "department": {
+            "type": "smallint(5)",
+            "default": 2,
+            "comment": "教部委属 1-是 2不是"
+        },
+        "doublehigh": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "双高代码"
+        },
+        "dual_class": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "38000-双一流"
+        },
+        "dual_class_name": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "双一流"
+        },
+        "f211": {
+            "type": "smallint(5)",
+            "default": 2,
+            "comment": "是否211 1-是 2-不是"
+        },
+        "f985": {
+            "type": "smallint(5)",
+            "default": 2,
+            "comment": "是否985 1-是 2-不是"
+        },
+        "hightitle": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "学校名称"
+        },
+        "inner_rate": {
+            "type": "smallint(5)",
+            "default": 0,
+            "comment": "未知"
+        },
+        "is_recruitment": {
+            "type": "smallint(5)",
+            "default": 0,
+            "comment": "Is Recuritment"
+        },
+        "is_top": {
+            "type": "smallint(5)",
+            "default": 0,
+            "comment": "Is Top"
+        },
+        "level": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "招生类型代码"
+        },
+        "level_name": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "招生类型名称"
+        },
+        "name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "学校名称"
+        },
+        "nature": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "办学类型代码"
+        },
+        "nature_name": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "办学类型"
+        },
+        "outer_rate": {
+            "type": "smallint(5)",
+            "default": 0,
+            "comment": "办学类型"
+        },
+        "province_id": {
+            "type": "smallint(5)",
+            "default": 0,
+            "comment": "所在省份code"
+        },
+        "province_name": {
+            "type": "varchar(64)",
+            "default": 0,
+            "comment": "所在省份"
+        },
+        "rank_": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "排名"
+        },
+        "rank_type": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "排名类型"
+        },
+        "rate": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "录取率"
+        },
+        "school_type": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "学校大类"
+        },
+        "tag_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "标签名称"
+        },
+        "type": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "院校类型代码"
+        },
+        "type_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "院校类型"
+        },
+        "view_month": {
+            "type": "int",
+            "default": 0,
+            "comment": "月访问数"
+        },
+        "view_total": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "总访问数显示名"
+        },
+        "view_total_number": {
+            "type": "int",
+            "default": 0,
+            "comment": "总访问数"
+        },
+        "view_week": {
+            "type": "int",
+            "default": 0,
+            "comment": "周访问数"
+        }
+    },
+    "pk" : "school_id"
+}

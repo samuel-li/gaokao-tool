@@ -1,0 +1,125 @@
+{
+    "schema" : {
+        "first_km":  {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "未知"
+        },
+        "length": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "学制"
+        },
+        "level2_name": {
+            "type": "varchar(128)",
+            "default": 4,
+            "comment": "专业类型 例工学"
+        },
+        "local_batch_name": {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "录取批次"
+        },
+        "local_type_name": {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "报考类别"
+        },
+        "name": {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "学校名称"
+        },
+        "num": {
+            "type": "int",
+            "default": 0,
+            "comment": "招生人数"
+        },
+        "province_name": {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "所在省份"
+        },
+        "school_id": {
+            "type": "int",
+            "default": 0,
+            "comment": "学校代码"
+        },
+        "sg_fxk": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": ""
+        },
+        "sg_info":  {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": ""
+        },
+        "sg_name":  {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": ""
+        },
+        "sg_sxk":  {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": ""
+        },
+        "sg_type":  {
+            "type": "smallint(5)",
+            "default": 0,
+            "comment": ""
+        },
+        "sp_fxk": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "first KM"
+        },
+        "sp_info": {
+            "type": "varchar(200)",
+            "default": "",
+            "comment": "报考要求"
+        },
+        "sp_sxk": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "sp_sxk"
+        },
+        "sp_type": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "sp_type"
+        },
+        "sp_xuanke":  {
+            "type": "varchar(200)",
+            "default": "",
+            "comment": "选课"
+        },
+        "spcode": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "专业代码"
+        },
+        "special_group": {
+            "type": "int",
+            "default": 0,
+            "comment": "未知"
+        },
+        "spname": {
+            "type": "varchar(512)",
+            "default": "",
+            "comment": "专业名称"
+        },
+        "tuition": {
+            "type": "int",
+            "default": 5000,
+            "comment": "学费"
+        },
+        "year": {
+            "type": "int",
+            "default": 9999,
+            "comment": "招生年份"
+        }
+    },
+    "pk" : "auto_increment"
+}

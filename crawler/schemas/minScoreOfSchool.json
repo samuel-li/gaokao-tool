@@ -1,0 +1,170 @@
+{
+    "schema": {
+        "answerurl":  {
+            "type": "varchar(200)",
+            "default": "",
+            "comment": "校方问答链接"
+        },
+        "average": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "平均分"
+        },
+        "avg_section": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "平均位次"
+        },
+        "city_name":  {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "院校所在城市"
+        },
+        "county_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "院校所在区县"
+        },
+        "dual_class": {
+            "type": "int",
+            "default": 0,
+            "comment": "双一流code"
+        },
+        "dual_class_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "双一流"
+        },
+        "filing": {
+            "type": "int",
+            "default": 0,
+            "comment": "Filing"
+        },
+        "first_km": {
+            "type": "int",
+            "default": 0,
+            "comment": "First KM"
+        },
+        "local_batch_id": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "录取批次ID"
+        },
+        "local_batch_name": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "录取批次"
+        },
+        "local_province_name": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "招生省份"
+        },
+        "local_type_name": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "专业类别"
+        },
+        "major_score": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "专业分数"
+        },
+        "max": {
+            "type": "varchar(32)",
+            "default": "",
+            "comment": "最高分"
+        },
+        "min": {
+            "type": "int",
+            "default": 0,
+            "comment": "专业录取最低分"
+        },
+        "min_section": {
+            "type": "int",
+            "default": 0,
+            "comment": "专业录取最低位次"
+        },
+        "name": {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "院校名称"
+        },
+        "nature_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "院校类型"
+        },
+        "num": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": ""
+        },
+        "proscore": {
+            "type": "int",
+            "default": 0,
+            "comment": "省控线"
+        },
+        "province_id": {
+            "type": "int",
+            "default": 0,
+            "comment": "所属省份ID"
+        },
+        "province_name": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "所属省份"
+        },
+        "school_id": {
+            "type": "int",
+            "default": 0,
+            "comment": "院校ID"
+        },
+        "sg_fxk": {
+            "type": "int",
+            "default": 0,
+            "comment": ""
+        },
+        "sg_info": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": ""
+        },
+        "sg_name": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": ""
+        },
+        "sg_sxk":  {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": ""
+        },
+        "sg_type": {
+            "type": "int",
+            "default": 0,
+            "comment": ""
+        },
+        "special_group": {
+            "type": "int",
+            "default": 0,
+            "comment": ""
+        },
+        "xclevel_name": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": ""
+        },
+        "year": {
+            "type": "int",
+            "default": 0,
+            "comment": "招生年份"
+        },
+        "zslx_name": {
+            "type": "varchar(16)",
+            "default": "",
+            "comment": "招生类别"
+        }
+    },
+    "pk": "auto_increment"
+}

@@ -1,0 +1,91 @@
+https://gaokao.chsi.com.cn/zyk/zybk/ccCategory?_t=1709559159677
+{"msg":[{"key":"1050","name":"本科（普通教育）"},{"key":"1070","name":"本科（职业教育）"},{"key":"1060","name":"高职（专科）"}],"flag":true}
+
+https://gaokao.chsi.com.cn/zyk/zybk/mlCategory/1050?_t=1709558779143
+{
+    "msg": [
+        {
+            "key": "105001",
+            "name": "哲学"
+        },
+        {
+            "key": "105002",
+            "name": "经济学"
+        },
+        {
+            "key": "105003",
+            "name": "法学"
+        },
+        {
+            "key": "105004",
+            "name": "教育学"
+        },
+        {
+            "key": "105005",
+            "name": "文学"
+        },
+        {
+            "key": "105006",
+            "name": "历史学"
+        },
+        {
+            "key": "105007",
+            "name": "理学"
+        },
+        {
+            "key": "105008",
+            "name": "工学"
+        },
+        {
+            "key": "105009",
+            "name": "农学"
+        },
+        {
+            "key": "105010",
+            "name": "医学"
+        },
+        {
+            "key": "105012",
+            "name": "管理学"
+        },
+        {
+            "key": "105013",
+            "name": "艺术学"
+        }
+    ],
+    "flag": true
+}
+
+https://gaokao.chsi.com.cn/zyk/zybk/xkCategory/105001?_t=1709558779306
+{"msg":[{"key":"10500101","name":"哲学类"}],"flag":true}
+
+https://gaokao.chsi.com.cn/zyk/zybk/specialityesByCategory/10500101?_t=1709558779435
+{
+    "msg": [
+        {
+            "zydm": "010101",
+            "zymc": "哲学",
+            "specId": "73381059",
+            "zymyd": "4.2"
+        },
+        {
+            "zydm": "010102",
+            "zymc": "逻辑学",
+            "specId": "73381063",
+            "zymyd": "3.5"
+        },
+        {
+            "zydm": "010103",
+            "zymc": "宗教学",
+            "specId": "73381067",
+            "zymyd": "4.3"
+        },
+        {
+            "zydm": "010104",
+            "zymc": "伦理学",
+            "specId": "164248791",
+            "zymyd": "5.0"
+        }
+    ],
+    "flag": true
+}

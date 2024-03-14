@@ -1,0 +1,63 @@
+{ // 2023清华大学物理类在辽宁的招生计划
+    "code": "0000",
+    "message": "成功---success",
+    "data": {
+        "item": [
+            {
+                "first_km": "70000",
+                "length": "4",
+                "level2_name": "--",
+                "local_batch_name": "本科批",
+                "local_type_name": "物理类",
+                "name": "清华大学",
+                "num": "36",
+                "province_name": "北京",
+                "school_id": "140",
+                "sg_fxk": "",
+                "sg_info": "",
+                "sg_name": "",
+                "sg_sxk": "",
+                "sg_type": 0,
+                "sp_fxk": "70000",
+                "sp_info": "首选物理，再选不限",
+                "sp_sxk": "70008",
+                "sp_type": "80001",
+                "sp_xuanke": "70000_70001_70002,70000_70001_70003,70000_70001_70005,70000_70002_70003,70000_70002_70005,70000_70003_70005",
+                "spcode": "0",
+                "special_group": "0",
+                "spname": "理科试验班类（物理基础类）（物理学）（等专业）",
+                "tuition": "5000",
+                "year": "2023"
+            },
+            {
+                "first_km": "70000",
+                "length": "8",
+                "level2_name": "医学",
+                "local_batch_name": "本科批",
+                "local_type_name": "物理类",
+                "name": "清华大学",
+                "num": "5",
+                "province_name": "北京",
+                "school_id": "140",
+                "sg_fxk": "",
+                "sg_info": "",
+                "sg_name": "",
+                "sg_sxk": "",
+                "sg_type": 0,
+                "sp_fxk": "70000",
+                "sp_info": "首选物理，再选化学",
+                "sp_sxk": "70001",
+                "sp_type": "80003",
+                "sp_xuanke": "70000_70001_70002,70000_70001_70003,70000_70001_70005",
+                "spcode": "1002",
+                "special_group": "0",
+                "spname": "临床医学类（临床医学）",
+                "tuition": "5000",
+                "year": "2023"
+            }
+        ],
+        "numFound": 2
+    },
+    "location": "",
+    "encrydata": ""
+}

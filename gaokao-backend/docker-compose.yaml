@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+#  mysqldb:
+#    restart: always
+#    privileged: true
+#    image: mysql:8.0
+#    container_name: mysqldb
+#    volumes:
+#      - /opt/mysql/data:/var/lib/mysql
+#      - /opt/mysql/conf.d:/etc/mysql/conf.d
+#      - /opt/mysql/conf/my.cnf:/etc/my.cnf
+#      - /opt/mysql/logs:/logs
+#    command:
+#      --character-set-server=utf8mb4
+#      --collation-server=utf8mb4_general_ci
+#      --explicit_defaults_for_timestamp=true
+#    environment:
+#      MYSQL_ROOT_PASSWORD: "123456"
+#      MYSQL_DATABASE: "gaokaodb"
+#      MYSQL_USER: "gaokao"
+#      MYSQL_PASSWORD: "123456"
+#      MYSQL_INITDB_SKIP_TZINFO: "Asia/Shanghai"
+#   ports:
+#      - 3306:3306
+  gaokao-backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - .:/src
+    command: >
+      sh -c "npm start"
+    expose:
+      - "3001"
+    ports:
+      - "3001:3001"
+#    depends_on:
+#      - mysqldb
+    environment:
+      - DATABASE_URL=mysql://root:123456@localhost:3306/gaokaodb
