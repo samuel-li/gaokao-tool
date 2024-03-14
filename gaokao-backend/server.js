@@ -26,16 +26,18 @@ function log(msg, level=null) {
       console.log(msg);
 };
 
+
 function createQuery(query, request, orderBy) {
-  let maxNum = Math.max(request.params.maxnum, request.params.minnum);
-  let minNum = Math.min(request.params.maxnum, request.params.minnum);
+  let maxNum = Math.max(Math.max(request.params.maxnum, request.params.minnum),0);
+  let minNum = Math.min(Math.min(request.params.maxnum, request.params.minnum),1000000);
   let yearOfQuery = -1;
   let majors = null;
+  let majorParam = [];
   let major_query = [];
   let size = 999;
   let school_id = -1;
 
-  if (request.query.major) {
+  if (request.query.major && request.query.major.trim()!="") {
     majors = request.query.major.split(",");
   } 
   if (request.query.size) {
@@ -52,12 +54,20 @@ function createQuery(query, request, orderBy) {
 
   if (majors != null && majors.length > 0) {
     majors.forEach((element, idx) => {
-      major_query.push("major_name  like ?");
-      majors[idx] = "%" + element +"%";
+      if(element.trim()!="") {
+        major_query.push("major_name  like ?");
+        majorParam.push("%" + element +"%");
+      } 
     });
-    query = query + "and (" + major_query.join(" or ") + " )";
+    if (major_query.length > 0) {
+      query = query + "and (" + major_query.join(" or ") + " )";
+    }
   }
-  let sqlParams = [minNum, maxNum].concat(majors);
+
+  let sqlParams = [minNum, maxNum];
+  if(major_query.length>0) {
+    sqlParams = sqlParams.concat(majorParam);
+  };
 
   if (yearOfQuery != -1) {
     query = query + " and `year`=? ";

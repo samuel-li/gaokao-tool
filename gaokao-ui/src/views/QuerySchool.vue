@@ -6,7 +6,9 @@ import {reactive, ref, watch} from 'vue'
 const queryObj = reactive({
   minsec: 2000,
   maxsec: 6000,
-  majors: "计算机,电子信息,自动化"
+  majors: "计算机,电子信息,自动化",
+  minsecplaceholder:'',
+  maxsecplaceholder:''
 });
 
 let navLink = {
@@ -35,6 +37,25 @@ const dataObj = reactive({dataSet})
 //   this.
 // })
 function querySchoolBySec() {
+  let canBeSubmitted = true;
+  if (queryObj.minsec=="") {
+    canBeSubmitted = false;
+    queryObj.minsecplaceholder = '必填';
+  } 
+  if (queryObj.maxsec=="") {
+    canBeSubmitted = false;
+    queryObj.maxsecplaceholder = '必填';
+  }
+  if (!canBeSubmitted) {
+    return;
+  }
+  if (queryObj.minsec=="") {
+    queryObj.minsec = 0;
+  }
+  if (queryObj.maxsec=="") {
+    queryObj.maxsec = '输入最大范围值';
+    return;
+  }
   // console.log("Query:" + 'http://localhost:3001/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors); 
   axios.get('http://101.37.252.181:3001/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors)
       .then(res=> { 
@@ -57,8 +78,8 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
     </p>
     <div class="queryarea">
         <div>
-            位次范围：
-            <input v-model.number="queryObj.minsec" class="num"> ~ <input  v-model.number="queryObj.maxsec"  class="num"/>
+            位次范围<span style="color:red;">*</span>：
+            <input v-model.number="queryObj.minsec" :placeholder="queryObj.minsecplaceholder" class="num"> ~ <input  v-model.number="queryObj.maxsec" :placeholder="queryObj.maxsecplaceholder" class="num"/>
         </div>
         <div>
             专业类别:
