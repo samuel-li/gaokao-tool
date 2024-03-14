@@ -25,7 +25,7 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
             <div>招生人数</div>
           </div>
           <div :class="`majorbox box-${year}-${key%2}`" v-if="dataObj[value][year]!=null" v-for="(info, key) in dataObj[value][year]">
-            <div>{{info.major_name}}</div>
+            <div :title="info.major_name">{{info.major_name}}</div>
             <div :title="`分数:${info.major_min_score}`">{{info.major_min_section}}<br />
               <span style="font-size: smaller;">({{info.major_min_score}})</span></div>
             <div>{{info.enroll_num}}</div>
