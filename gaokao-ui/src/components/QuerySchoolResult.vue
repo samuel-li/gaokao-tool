@@ -13,6 +13,7 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
   <div class="schoolbox" v-for="(value, key) in dataObj.schools">
     <div class="schoolurl">
       <a target="_blank" :href="gaokaourl(value)">{{dataObj.schooldict[value]['name']}}</a>
+      <a target="_blank" :href="`https://www.shanghairanking.cn/institution/${dataObj.schooldict[value]['rankId']}`" v-if="dataObj.schooldict[value]['rankId']!=''"><img src="../assets/ranklogo.svg"> </a>
       <span v-if="dataObj.schooldict[value]['f985211']-1==10">985</span>
       <span v-if="dataObj.schooldict[value]['f985211']%10==1">211</span>
     </div>
@@ -64,6 +65,13 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
     margin-bottom: 4px;
     color: orange;
     border: 1px solid orangered;
+  }
+  .schoolurl a img {
+    width: 60px;
+    height: 20px;
+    position: relative;
+    top: 5px;
+    margin : 0 10px;
   }
   .yeartitle {
     font-size : x-large;

@@ -1,0 +1,25 @@
+{
+    "schema": {
+        "up": {
+            "type": "varchar(96)",
+            "default": "",
+            "comment": "Ranking ID"
+        },
+        "nameCn": {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "中文名称"
+        },
+        "nameEn": {
+            "type": "varchar(128)",
+            "default": "",
+            "comment": "English Name"
+        },
+        "rankCD": {
+            "type": "varchar(64)",
+            "default": "",
+            "comment": "Rank Code"
+        }
+    },
+    "pk" : "up"
+}

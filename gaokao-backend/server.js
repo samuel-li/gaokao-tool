@@ -6,16 +6,17 @@ const connectionString = process.env.DATABASE_URL || "mysql://root:123456@localh
 
 const querySchoolsByYear = `select 
     distinct
-    lpmsb.year,lpmsb.school_id, lpmsb.name, (lpmsb.f985*10+lpmsb.f211) as f985211,
+    lpmsb.year,lpmsb.school_id, lpmsb.name, ru.up as rankId, (lpmsb.f985*10+lpmsb.f211) as f985211,
     lpmsb.major_name, lpmsb.major_min_section,
     lpmsb.major_min_score,ep.num
     from ln_physical_majors_score_benke lpmsb 
+    left join ranking_univ ru on lpmsb.name like concat(ru.nameCn, '%')
     left join enrollPlan ep on ep.school_id=lpmsb.school_id and ep.year=lpmsb.year
-    and (
-      case when locate('（', lpmsb.major_name)>0 
-      then (ep.spname like concat(lpmsb.major_name, '%') or lpmsb.major_name like concat(ep.spname, '%'))
-      else lpmsb.major_name=ep.spname end
-    ) `;
+                            and (
+                              case when locate('（', lpmsb.major_name)>0 
+                              then (ep.spname like concat(lpmsb.major_name, '%') or lpmsb.major_name like concat(ep.spname, '%'))
+                              else lpmsb.major_name=ep.spname end
+                            ) `;
 
 function log(msg, level=null) {
       let nowTime = new Date();
@@ -142,7 +143,7 @@ function buildList(rows) {
     });
     if (!dataObj['schools'].includes(row['school_id'])){
       dataObj['schools'].push(row['school_id']);
-      dataObj['schooldict'][row['school_id']]={name:row['name'],f985211:row['f985211']};
+      dataObj['schooldict'][row['school_id']]={name:row['name'],f985211:row['f985211'],rankId:row['rankId']};
     }
   })
   return dataObj;

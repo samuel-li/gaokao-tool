@@ -35,6 +35,8 @@ let paramDict = {
 ```node 04_enrollPlanOfSchool.js```
 6. 抓取所有所有专业的基本信息  
 ```node 05_getMajorInfo.js```
+7. 软科里的大学ID及名称 
+```node 05_getMajorInfo.js```
 
 ## 运行注意事项  
 1. 学校数据需要先抓取（01_getSchoolData.js）完成才能进行抓取其它数据。
