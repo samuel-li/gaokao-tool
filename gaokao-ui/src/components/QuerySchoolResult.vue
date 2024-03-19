@@ -1,25 +1,56 @@
 <script setup>
-defineProps({
+import { watch,ref,reactive } from 'vue';
+import axios from 'axios'
+
+const props = defineProps({
     dataObj: {
         type: Object,
         required: true
   }
-})
+});
+
+const enrollPlanSet = ref({});
+const enrollPlanObj = reactive({enrollPlanSet})
+
+watch(props, (newProp, oldProp)=>{
+  if (newProp.dataObj.schools) {
+    axios.get('/api/enrollplan/?sids='+newProp.dataObj.schools.join(','))
+      .then(res=> { 
+          if(res.status == 200) {
+            console.log(res.data); 
+            let enrollPlan = {};
+            res.data.items.forEach((_item, _idx)=>{
+              enrollPlan[_item.school_id]={};
+              Object.keys(_item).forEach((_key,_kidx)=>{
+                if (_key != 'school_id') {
+                  if (_key.startsWith("enroll_num_")) {
+                    enrollPlan[_item.school_id][_key.substring(11)]=_item[_key];
+                  }
+                }
+              });
+            });
+            enrollPlanSet.value = enrollPlan;
+            console.log("Enroll Plan:" + JSON.stringify(enrollPlan));
+          }
+      }) 
+      .catch(err=> { console.log(err); });
+  }
+});
 
 let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"/provinceline"};
 </script>
 
 <template>
-  <div class="schoolbox" v-for="(value, key) in dataObj.schools">
+  <div class="schoolbox" v-for="(value, key) in props.dataObj.schools">
     <div class="schoolurl">
-      <a target="_blank" :href="gaokaourl(value)">{{dataObj.schooldict[value]['name']}}</a>
+      <a target="_blank" :href="gaokaourl(value)">{{props.dataObj.schooldict[value]['name']}}</a>
       <a target="_blank" :href="`https://www.shanghairanking.cn/institution/${dataObj.schooldict[value]['rankId']}`" v-if="dataObj.schooldict[value]['rankId']!=''"><img src="../assets/ranklogo.svg"> </a>
       <span v-if="dataObj.schooldict[value]['f985211']-1==10">985</span>
       <span v-if="dataObj.schooldict[value]['f985211']%10==1">211</span>
     </div>
     <div class="majorlist">
         <div v-for="(year) in [2023,2022,2021]">
-          <div class="yeartitle">{{year}}</div>
+          <div class="yeartitle">{{year}} <span style="font-size:small;" v-if="enrollPlanObj.enrollPlanSet[value]">(共招{{ enrollPlanObj.enrollPlanSet[value][year] }}人)</span></div>
           <div :class="`majorbox box-${year}`" >
             <div>专业名称</div>
             <div>位次</div>

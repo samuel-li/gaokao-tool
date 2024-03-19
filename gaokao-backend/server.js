@@ -149,6 +149,49 @@ function buildList(rows) {
   return dataObj;
 }
 
+
+/**
+ * 
+ * @param {Array<Integer>} yearsOfQuery [2023,2022,2021]
+ * @param {String} local_batch_name "本科批"
+ * @param {String} local_type_name "物理类"
+ * @returns SQL for query enroll plan by school ids.
+ */
+function ceateQueryForEnrollPlan( yearsOfQuery, local_batch_name='本科批', local_type_name='物理类') {
+  try{
+    if (!yearsOfQuery instanceof Array || yearsOfQuery.length <= 0) {
+      log('Need to given years for quering enroll plan.', 'WARNING')
+      return "";
+    }
+  
+    let selFields = [];
+    let fromSet = [];
+    let priTable = '';
+    yearsOfQuery.forEach((year,idx)=>{
+      let y = parseInt(year);
+      if (selFields.length == 0) {
+        selFields.push('Data'+y+'.school_id as school_id');
+        priTable = 'Data'+y;
+        fromSet.push(`(select school_id, sum(num) as enroll_num
+        from enrollPlan ep 
+        where local_batch_name ='`+local_batch_name+`' and local_type_name ='`+local_type_name+`' and ep.year=`+y+`
+        group by school_id ) Data`+y);
+      } else {
+        fromSet.push(`(select school_id, sum(num) as enroll_num
+        from enrollPlan ep 
+        where local_batch_name ='`+local_batch_name+`' and local_type_name ='`+local_type_name+`' and ep.year=`+y+`
+        group by school_id ) Data`+y + ' ON '+priTable+'.school_id=Data'+y+'.school_id '+"\n");
+      }
+      selFields.push('Data'+y+'.enroll_num as enroll_num_'+y);
+    });
+    return 'SELECT '+selFields.join(',') + ' FROM ' + fromSet.join(' INNER JOIN ') + ' WHERE '+priTable+'.school_id in (?)';
+
+  } catch (error) {
+    log(err, "ERROR");
+    return "";
+  }
+}
+
 function build(opts = {}) {
   const app = fastify(opts);
 
@@ -165,6 +208,7 @@ function build(opts = {}) {
       "/section/:minnum/:maxnum?major=majorA,majorB,majorC&year=2023&&size=numberOfItems",
       "/school/score/:minnum/:maxnum?major=majorA,majorB,majorC&year=2023&size=numberOfItems",
       "/school/section/:minnum/:maxnum?major=majorA,majorB,majorC&year=2023&&size=numberOfItems",
+      "/enrollplan/:school_id"
     ]};
   });
 
@@ -209,6 +253,44 @@ function build(opts = {}) {
     } else {
       return {};
     }
+  });
+
+  app.get("/enrollplan/", async (request, reply) => {
+    if (request.query.sids == null || request.query.sids.trim()=='') {
+      log("No given school ids for query.", "ERROR");
+      return {numFound: 0, items: []};
+    }
+    let sids = request.query.sids.split(',');
+    let schoolIds = [];
+    sids.forEach((_sid, _idx)=>{
+      try{
+        let __sid = parseInt(_sid);
+        log("__sid:"+__sid, 'DEBUG');
+        if (!isNaN(__sid)) {
+          schoolIds.push(__sid);
+        }
+      } catch (err) {
+        log("Invalid school id." + err, "ERROR");
+      }
+    });
+    
+
+    try {
+      let querySql = ceateQueryForEnrollPlan([2023, 2022, 2021]);
+      // log("School IDs:"+JSON.stringify(schoolIds), 'DEBUG');
+      // log(querySql, 'DEBUG');
+      const connection = await app.mysql.getConnection();
+      const [rows, fields] = await connection.query(querySql, [schoolIds]);
+      connection.release();
+      if (rows != null) {
+        return {numFound: rows.length, items: rows};
+      } else {
+        return {numFound: 0, items: []};
+      }
+    } catch (err) {
+      log(err, "ERROR");
+    }
+    return {numFound: 0, items: []};
   });
 
   return app;

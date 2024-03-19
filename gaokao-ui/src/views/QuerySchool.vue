@@ -61,7 +61,7 @@ function querySchoolBySec() {
     return;
   }
   // console.log("Query:" + 'http://localhost:3001/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors); 
-  axios.get('/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors)
+  axios.get('/api/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors)
       .then(res=> { 
           if(res.status == 200) {
             dataSet.value = res.data;
@@ -77,7 +77,7 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
 
 <template>
     <p class="querytitle">
-      2024辽宁理工科报考工具（辽宁，理工科，普通批次）<br />
+      2024年辽宁理工科报考工具（辽宁，理工科，普通批次）- 2024年预计考生20.51万，2023年19.6万<br />
       <span style="font-size: small;color:red;font-style:oblique;">(仅供按位次初筛志愿使用，具体报考建议参考以下网站)</span>
     </p>
     <div class="queryarea">
@@ -109,11 +109,12 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
 <style>
 @media (min-width: 1024px) {}
   .queryarea {
-    min-height: 7vh;
+    /* min-height: 7vh; */
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr 1fr;
     text-align: center;
+    margin-bottom: 20px;
   }
   .querytitle {
         text-align: center;
