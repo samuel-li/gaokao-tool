@@ -10,10 +10,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <top_nav>
+  <div class="top_nav">
     <RouterLink to="/">主页-报考工具</RouterLink>
     <RouterLink to="/qa">报考知识点</RouterLink>
-  </top_nav>
+  </div>
   <RouterView />
 </template>
 
@@ -45,7 +45,7 @@ header {
     flex-wrap: wrap;
   }
 
-  top_nav {
+  .top_nav {
     text-align: left;
     /*margin-left: -1rem;*/
     font-size: 1rem;
@@ -53,7 +53,7 @@ header {
     margin-top: 1rem;
   }
 
-  top_nav a{
+  .top_nav a{
     font-size:small;
     color:cornflowerblue;
     min-width:40px;
