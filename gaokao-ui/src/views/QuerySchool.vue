@@ -1,7 +1,7 @@
 <script setup>
 import QuerySchoolResult from "../components/QuerySchoolResult.vue"
 import axios from 'axios'
-import {reactive, ref, watch} from 'vue'
+import {reactive, ref} from 'vue'
 
 const queryObj = reactive({
   minsec: 2000,
@@ -27,6 +27,10 @@ let navLink = {
   '阳光高考' : {
     url : 'https://gaokao.chsi.com.cn/',
     desc : '教育部高校招生阳光工程指定平台'
+  }, 
+  '辽宁招生考试之窗' : {
+    url : 'https://www.lnzsks.com/',
+    desc : '典型官网风格，主管单位：辽宁省高中等教育招生考试委员会办公室'
   }, 
 }
 
@@ -57,7 +61,7 @@ function querySchoolBySec() {
     return;
   }
   // console.log("Query:" + 'http://localhost:3001/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors); 
-  axios.get('http://101.37.252.181:3001/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors)
+  axios.get('/schools/section/'+queryObj.minsec+'/'+queryObj.maxsec+'?major='+queryObj.majors)
       .then(res=> { 
           if(res.status == 200) {
             dataSet.value = res.data;
@@ -127,7 +131,7 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
   }
   nav {
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     text-align: center;
     padding-bottom: 15px;
   }

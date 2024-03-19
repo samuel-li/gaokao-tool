@@ -153,7 +153,7 @@ function build(opts = {}) {
   const app = fastify(opts);
 
   app.register(require("@fastify/cors"), {
-    origin:"*",
+    origin:"http://101.37.252.181",
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET','POST','PUT']
   });

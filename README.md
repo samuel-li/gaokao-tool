@@ -17,5 +17,23 @@
 访问地址 ：http://localhost  
 技术栈 ：VUE3 + Vite  
 
+## Nginx 配置
+```
+        location /schools/ {
+                proxy_pass http://localhost:3001/schools;
+                rewrite "^/schools/(.*)$" /schools/$1 break;
+        }
+
+        location /qa {
+                try_files $uri $uri/ /index.html;
+        }
+
+        location / {
+                try_files $uri $uri/ =404;
+                error_page 404 /error/404.html;
+        }
+
+```
+
 ## `代码没有版权，仅供自用及学习NodeJS使用，请勿违法`
 ### 如有技术讨论请发邮件至 : samuel.li-dl@hotmail.com 不定期查看
