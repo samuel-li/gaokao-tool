@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import {onMounted} from 'vue'
 
 onMounted(() => {
-  if (!window.location.href.startsWith('http://101.37.252.181')) {
+  if (!window.location.href.startsWith('http://101.37.252.181') && !window.location.href.startsWith('http://www.youlaixin.com')) {
     window.location.href = 'http://101.37.252.181/';
   }
 });
@@ -11,8 +11,8 @@ onMounted(() => {
 
 <template>
   <div class="top_nav">
-    <RouterLink to="/">主页-报考工具</RouterLink>
-    <RouterLink to="/qa">报考知识点</RouterLink>
+    <RouterLink to="/">志愿填报</RouterLink>
+    <RouterLink to="/qa">志愿填报知识点</RouterLink>
   </div>
   <RouterView />
 </template>

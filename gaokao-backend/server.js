@@ -6,7 +6,7 @@ const connectionString = process.env.DATABASE_URL || "mysql://root:123456@localh
 
 const querySchoolsByYear = `select 
     distinct
-    lpmsb.year,lpmsb.school_id, lpmsb.name, ru.up as rankId, (lpmsb.f985*10+lpmsb.f211) as f985211,
+    lpmsb.year,lpmsb.school_id, concat(lpmsb.name,'(',lpmsb.province_name,')') as name, ru.up as rankId, (lpmsb.f985*10+lpmsb.f211) as f985211,
     lpmsb.major_name, lpmsb.major_min_section,
     lpmsb.major_min_score,ep.num
     from ln_physical_majors_score_benke lpmsb 
@@ -33,6 +33,7 @@ function createQuery(query, request, orderBy) {
   let minNum = Math.min(Math.min(request.params.maxnum, request.params.minnum),1000000);
   let yearOfQuery = -1;
   let majors = null;
+  let provinces = null;
   let majorParam = [];
   let major_query = [];
   let size = 999;
@@ -40,6 +41,9 @@ function createQuery(query, request, orderBy) {
 
   if (request.query.major && request.query.major.trim()!="") {
     majors = request.query.major.split(",");
+  } 
+  if (request.query.provinces && request.query.provinces.trim()!="") {
+    provinces = request.query.provinces.split(",");
   } 
   if (request.query.size) {
     size = parseInt(request.query.size);
@@ -52,6 +56,7 @@ function createQuery(query, request, orderBy) {
   }
 
   let isCountQuery = query.toLowerCase().indexOf(" count(") >= 0;
+  let sqlParams = [minNum, maxNum];
 
   if (majors != null && majors.length > 0) {
     majors.forEach((element, idx) => {
@@ -62,13 +67,22 @@ function createQuery(query, request, orderBy) {
     });
     if (major_query.length > 0) {
       query = query + "and (" + major_query.join(" or ") + " )";
+      sqlParams = sqlParams.concat(majorParam);
     }
   }
 
-  let sqlParams = [minNum, maxNum];
-  if(major_query.length>0) {
-    sqlParams = sqlParams.concat(majorParam);
-  };
+  if (provinces != null && provinces.length > 0) {
+    let provIds = [];
+    provinces.forEach((prov, idx) => {
+      if(prov.trim()!="") {
+        provIds.push(prov);
+      } 
+    });
+    if (provIds.length > 0) {
+      query = query + "and province_id in (?)";
+      sqlParams.push(provIds);
+    }
+  }
 
   if (yearOfQuery != -1) {
     query = query + " and `year`=? ";
@@ -170,21 +184,16 @@ function ceateQueryForEnrollPlan( yearsOfQuery, local_batch_name='本科批', lo
     yearsOfQuery.forEach((year,idx)=>{
       let y = parseInt(year);
       if (selFields.length == 0) {
-        selFields.push('Data'+y+'.school_id as school_id');
-        priTable = 'Data'+y;
-        fromSet.push(`(select school_id, sum(num) as enroll_num
-        from enrollPlan ep 
-        where local_batch_name ='`+local_batch_name+`' and local_type_name ='`+local_type_name+`' and ep.year=`+y+`
-        group by school_id ) Data`+y);
-      } else {
-        fromSet.push(`(select school_id, sum(num) as enroll_num
-        from enrollPlan ep 
-        where local_batch_name ='`+local_batch_name+`' and local_type_name ='`+local_type_name+`' and ep.year=`+y+`
-        group by school_id ) Data`+y + ' ON '+priTable+'.school_id=Data'+y+'.school_id '+"\n");
-      }
+        selFields.push('sddata.school_id as school_id');
+      } 
+      fromSet.push(`(select school_id, sum(num) as enroll_num
+      from enrollPlan ep 
+      where local_batch_name ='`+local_batch_name+`' and local_type_name ='`+local_type_name+`' and ep.year=`+y+`
+      group by school_id ) Data`+y + ' ON sddata.school_id=Data'+y+'.school_id '+"\n");
+      
       selFields.push('Data'+y+'.enroll_num as enroll_num_'+y);
     });
-    return 'SELECT '+selFields.join(',') + ' FROM ' + fromSet.join(' INNER JOIN ') + ' WHERE '+priTable+'.school_id in (?)';
+    return 'SELECT '+selFields.join(',') + ' FROM (select school_id from schoolData sd) sddata LEFT JOIN ' + fromSet.join(' LEFT JOIN ') + ' WHERE sddata.school_id in (?)';
 
   } catch (error) {
     log(err, "ERROR");
@@ -196,7 +205,7 @@ function build(opts = {}) {
   const app = fastify(opts);
 
   app.register(require("@fastify/cors"), {
-    origin:"http://101.37.252.181",
+    origin:"(http://101.37.252.181|http://.*youlaixin.com)",
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET','POST','PUT']
   });
@@ -208,7 +217,8 @@ function build(opts = {}) {
       "/section/:minnum/:maxnum?major=majorA,majorB,majorC&year=2023&&size=numberOfItems",
       "/school/score/:minnum/:maxnum?major=majorA,majorB,majorC&year=2023&size=numberOfItems",
       "/school/section/:minnum/:maxnum?major=majorA,majorB,majorC&year=2023&&size=numberOfItems",
-      "/enrollplan/:school_id"
+      "/enrollplan/:school_id",
+      '/getprov/:query'
     ]};
   });
 
@@ -253,6 +263,28 @@ function build(opts = {}) {
     } else {
       return {};
     }
+  });
+
+  app.get("/getprov/:provstr", async (request, reply) => {
+      const connection = await app.mysql.getConnection();
+      let rows = [];
+      let fields = null;
+      if (request.params.provstr == null || request.params.provstr.trim()=="") {
+        let sqlQuery = "select distinct province_id, province_name from schoolData";
+        [rows, fields] = await connection.query(sqlQuery);
+      } else {
+        let sqlQuery = "select distinct province_id, province_name from schoolData where province_name like ? limit 10";
+        [rows, fields] = await connection.query(sqlQuery, '%'+request.params.provstr+'%');
+      }
+      connection.release();
+      let retObj = [];
+      rows.forEach((row,idx) => {
+        let prov = {id:'',name:''};
+        prov.id = row['province_id'];
+        prov.name = row['province_name'];
+        retObj.push(prov);
+      });
+      return retObj;
   });
 
   app.get("/enrollplan/", async (request, reply) => {

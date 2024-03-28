@@ -17,7 +17,7 @@ watch(props, (newProp, oldProp)=>{
     axios.get('/api/enrollplan/?sids='+newProp.dataObj.schools.join(','))
       .then(res=> { 
           if(res.status == 200) {
-            console.log(res.data); 
+            // console.log(res.data); 
             let enrollPlan = {};
             res.data.items.forEach((_item, _idx)=>{
               enrollPlan[_item.school_id]={};
@@ -30,7 +30,7 @@ watch(props, (newProp, oldProp)=>{
               });
             });
             enrollPlanSet.value = enrollPlan;
-            console.log("Enroll Plan:" + JSON.stringify(enrollPlan));
+            // console.log("Enroll Plan:" + JSON.stringify(enrollPlan));
           }
       }) 
       .catch(err=> { console.log(err); });
@@ -121,6 +121,7 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
   .majorbox div {
     padding:5px;
   }
+
   .majorbox div:first-child {
     min-width: 40px;
     overflow: hidden;
@@ -129,7 +130,16 @@ let gaokaourl = (school_id)=>{return "https://www.gaokao.cn/school/"+school_id+"
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
-  
+
+  @media (min-width: 1024px) {
+    .majorbox div:first-child {
+      min-width: 40px;
+      overflow: inherit;
+      -webkit-box-orient: unset;
+      -webkit-line-clamp: unset;
+      text-overflow: unset;
+    }
+  }
 
   .box-2023 {
     background-color: #485460;
